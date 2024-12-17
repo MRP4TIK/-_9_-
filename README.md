@@ -80,21 +80,25 @@ print(f"Результат: {'Животное обнаружено' if predicte
 
 ## Использованная структура проекта
 wild-animal-detection/
-  # Папка с изображениями - Images/                 
- # Jupyter Notebook с основным кодом - обучение_нейросетей.ipynb 
-├── requirements.txt          # Список зависимостей
-├── Labels_001-100.txt        # Метки для изображений (1-я часть)
-├── Labels_101-200.txt        # Метки для изображений (2-я часть)
-└── README.md                 # Документация к проекту
+- Папка с изображениями: Images/                 
+- Jupyter Notebook с основным кодом: обучение_нейросетей.ipynb
+- Список зависимостей: requirements.txt 
+- Метки для изображений (1-я часть): Labels_001-100.txt
+- Метки для изображений (2-я часть): Labels_101-200.txt
+- Документация к проекту: README.md
 
 ## Ключевые метрики проекта
 После обучения модели были получены следующие результаты:
 
-Точность (Accuracy): 92%
-F1-score: 0.91
-Recall: 0.89
-Confusion Matrix:
-True Positive: 85
-True Negative: 90
-False Positive: 5
-False Negative: 10
+- Точность (Accuracy): 92%
+- F1-score: 0.91
+- Recall: 0.89
+- Confusion Matrix:
+  - True Positive: 85
+  - True Negative: 90
+  - False Positive: 5
+  - False Negative: 10
+ 
+  ### Матрица ошибок
+  ![Unknown-1](https://github.com/user-attachments/assets/c0b54b5f-0377-46fc-b946-35e5d129508c)
+
