@@ -77,8 +77,9 @@ with torch.no_grad():
     predicted_class = torch.argmax(output).item()
 
 print(f"Результат: {'Животное обнаружено' if predicted_class == 1 else 'Животное отсутствует'}")
-
-## Использованная структура проекта
+### Внедрение
+Произведена интеграция с Telegram bot: https://t.me/wild_animal_detection_bot
+## Полученная структура проекта
 wild-animal-detection/
 - Папка с изображениями: Images/                 
 - Jupyter Notebook с основным кодом: обучение_нейросетей.ipynb
@@ -98,7 +99,10 @@ wild-animal-detection/
   - True Negative: 90
   - False Positive: 5
   - False Negative: 10
- 
+    
+ ### Демонстрация результатов с нейронок
+ ![Unknown-2](https://github.com/user-attachments/assets/62b2e391-192c-4651-8424-4e4f4c591665)
+
   ### Матрица ошибок
   ![Unknown-1](https://github.com/user-attachments/assets/c0b54b5f-0377-46fc-b946-35e5d129508c)
 
