@@ -55,3 +55,46 @@ pip install -r requirements.txt
 ### После чего загружаем данные
 Мы поместили изображения в папку Images/ и текстовые файлы с метками (Labels_001-100.txt, Labels_101-200.txt) в корневую директорию проекта.
   
+## Применение
+### 1. Запуск проекта
+Открываем файл обучение_нейросетей.ipynb через Jupyter Notebook или Google Colab, и следуем инструкциям (запускаем код).
+### 2. Процесс распознавания
+Обучив модель, приступаем к ее использованию и распознаванию диких животных (медведей и тигров) на изображениях:
+from PIL import Image
+from torchvision import transforms
+### Загрузка изображения
+image = Image.open("path_to_your_image.jpg").convert("RGB")
+### Подготовка изображения
+transform = transforms.Compose([
+    transforms.Resize((224, 224)),
+    transforms.ToTensor()
+])
+image_tensor = transform(image).unsqueeze(0)
+### Предсказание
+model.eval()
+with torch.no_grad():
+    output = model(image_tensor)
+    predicted_class = torch.argmax(output).item()
+
+print(f"Результат: {'Животное обнаружено' if predicted_class == 1 else 'Животное отсутствует'}")
+
+## Использованная структура проекта
+wild-animal-detection/
+├── Images/                   # Папка с изображениями
+├── обучение_нейросетей.ipynb  # Jupyter Notebook с основным кодом
+├── requirements.txt          # Список зависимостей
+├── Labels_001-100.txt        # Метки для изображений (1-я часть)
+├── Labels_101-200.txt        # Метки для изображений (2-я часть)
+└── README.md                 # Документация к проекту
+
+## Ключевые метрики проекта
+После обучения модели были получены следующие результаты:
+
+Точность (Accuracy): 92%
+F1-score: 0.91
+Recall: 0.89
+Confusion Matrix:
+True Positive: 85
+True Negative: 90
+False Positive: 5
+False Negative: 10
