@@ -38,7 +38,7 @@
 
 ## Использованные технологии
 
-- Язык программирования: Python
+- Язык программирования: Python, Java
 - Фреймворки и библиотеки:
   - PyTorch
   - Torchvision
@@ -46,6 +46,7 @@
   - Scikit-learn
   - Seaborn
   - PIL (Pillow)
+  - Spring Boot
 - Среда разработки: Google Colab
 
 ## Установка
