@@ -19,18 +19,19 @@ import java.nio.file.Files;
 @Log4j
 public class TelegramBot extends TelegramLongPollingBot {
 
-    // Укажите токен и имя бота (можно вынести в application.properties)
-    private final String BOT_TOKEN = "7826699732:AAG6hyICBTcqmfLW2MBFQM7Cw47U2F6iOAE";
-    private final String BOT_USERNAME = "wild_animal_detection_bot";
+    @Value("${bot.name}")
+    private String botName;
+    @Value("${bot.token}")
+    private String botToken;
 
     @Override
     public String getBotUsername() {
-        return BOT_USERNAME;
+        return botName;
     }
 
     @Override
     public String getBotToken() {
-        return BOT_TOKEN;
+        return botToken;
     }
 
     @Override
@@ -41,10 +42,11 @@ public class TelegramBot extends TelegramLongPollingBot {
 
             if ("/start".equals(messageText)) {
                 // Формируем приветственное сообщение
-                String welcomeMessage = "\uD83C\uDF1F Приветствую тебя, любитель дикой природы! \uD83D\uDC3E" +
-                        " Этот бот создан для захватывающего путешествия в мир диких животных." +
-                        " Отправь мне фотографию, и я с радостью помогу определить, есть ли на ней величественный тигр" +
-                "\uD83D\uDC05 или могучий медведь \uD83D\uDC3B. Давай исследовать вместе! \uD83C\uDF3F✨";
+                String welcomeMessage = "\uD83D\uDC4B Привет! Добро пожаловать в нашего бота по распознаванию диких животных!\n" +
+                        "\n" +
+                        "\uD83D\uDC3B Этот бот предназначен для помощи в распознавании диких животных, которые могут выйти к людям в различных регионах России. На данный момент мы можем определить только медведя и тигра.\n" +
+                        "\n" +
+                        "\uD83D\uDCF8 Чтобы начать, просто отправьте фотографию животного, и мы постараемся помочь вам с его идентификацией!";
 
                 SendMessage message = new SendMessage();
                 message.setChatId(chatId);
@@ -77,9 +79,14 @@ public class TelegramBot extends TelegramLongPollingBot {
             // Передаём файл в Python скрипт
              String result = callPythonScript(photoFile);
 
-             
-            // Возвращаем результат пользователю
-            sendTextMessage(message.getChatId(), "Результат анализа: " + result);
+             if(result.equals("0")){
+                 sendTextMessage(message.getChatId(), " ❌ На фото зверь не обнаружен!");
+             } else if(result.equals("1")){
+                 sendTextMessage(message.getChatId(), "\uD83D\uDC3B На фото обнаружен дикий зверь!");
+             } else {
+                 // Возвращаем результат пользователю
+                 sendTextMessage(message.getChatId(), "Произошла ошибка при обработке фотографии.");
+             }
 
             // Удаляем временный файл
             photoFile.delete();
@@ -98,7 +105,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private String callPythonScript(File photo) {
         try {
-            ProcessBuilder pb = new ProcessBuilder("python","C:\\Users\\kelar\\Desktop\\-_9_--main\\analyze_photo.py", photo.getAbsolutePath());
+            ProcessBuilder pb = new ProcessBuilder("python","analyze_photo.py", photo.getAbsolutePath());
             Process process = pb.start();
 
             // Читаем результат
