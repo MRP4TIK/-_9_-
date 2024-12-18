@@ -5,7 +5,7 @@ from torchvision.models import resnet18
 from PIL import Image
 
 # Загрузка пути к весам модели
-MODEL_PATH = r'C:\\Users\\kelar\\Desktop\\-_9_--main\\resnet_18.pth'
+MODEL_PATH = r'-_9_--main\\resnet_18.pth'
 
 # Преобразования для изображения
 def transform_image(image_path):
