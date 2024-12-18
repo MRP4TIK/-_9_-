@@ -1,5 +1,5 @@
 # 9 Команда
-Определение диких животных на фотографиях
+## Определение диких животных на фотографиях
 
 ## Описание проекта
 Главной целью проекта является разработка системы мониторинга и раннего обнаружения диких животных на фотографиях с использованием технологий компьютерного зрения. Этот проект направлен на повышение безопасности населения и защиту диких животных, таких как тигры и медведи, которые могут заходить в города.
@@ -66,6 +66,7 @@ from torchvision import transforms
 ### Загрузка изображения
 image = Image.open("path_to_your_image.jpg").convert("RGB")
 ### Подготовка изображения
+```
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor()
@@ -78,6 +79,7 @@ with torch.no_grad():
     predicted_class = torch.argmax(output).item()
 
 print(f"Результат: {'Животное обнаружено' if predicted_class == 1 else 'Животное отсутствует'}")
+```
 ### Внедрение
 Произведена интеграция с Telegram bot: https://t.me/wild_animal_detection_bot
 ## Полученная структура проекта
@@ -92,15 +94,9 @@ wild-animal-detection/
 ## Ключевые метрики проекта
 После обучения модели были получены следующие результаты:
 
-- Точность (Accuracy): 92%
-- F1-score: 0.91
-- Recall: 0.89
-- Confusion Matrix:
-  - True Positive: 85
-  - True Negative: 90
-  - False Positive: 5
-  - False Negative: 10
-    
+- Точность (Accuracy): 0.999
+- F1-score: 0.999
+- Recall: 0.999
  ### Демонстрация результатов с нейронок
  ![Unknown-2](https://github.com/user-attachments/assets/62b2e391-192c-4651-8424-4e4f4c591665)
 
